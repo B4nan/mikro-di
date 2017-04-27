@@ -14,7 +14,10 @@ test('build container [with default options]', () => {
 
   const di = require(context);
   expect(di).toMatchObject(require('./expected'));
-  fs.unlinkSync(context);
+
+  if (fs.existsSync(context)) {
+    fs.unlinkSync(context);
+  }
 });
 
 test('build container [with specified options]', () => {
@@ -32,5 +35,8 @@ test('build container [with specified options]', () => {
 
   const di = require(context);
   expect(di).toMatchObject(require('./expected'));
-  fs.unlinkSync(context);
+
+  if (fs.existsSync(context)) {
+    fs.unlinkSync(context);
+  }
 });

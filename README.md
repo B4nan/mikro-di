@@ -23,17 +23,19 @@ or
 DI container should be the first thing you enable in your application, so the right place 
 for it is in the `app.js` file. 
 
+**app.js**
 ```javascript
-// create DI container
-const DIContainer = require('mikro-di');
-const container = new DIContainer(['api/services', 'api/repositories']);
-const context = container.build();
- 
-// and expose it
-global.di = require(context);
+require('mikro-di').init(['api/services', 'api/repositories']);
 ```
 
-This way you will be able to access your dependencies via `di.YourFunkyService`.
+And then you can require it and use it:
+
+```javascript
+const di = require('mikro-di').di;
+  
+const ret = di.YourFunkyService.process();
+console.log(ret);
+```
 
 ## Registering dependencies
 
@@ -90,6 +92,8 @@ If you want to use `mikro-di` inside your sails.js controller, you can use direc
 the global `di` object like this:
 
 ```javascript
+const di = require('mikro-di').di;
+  
 module.exports = {
  
   /** @var {YourFunkyService} sendits */
@@ -110,7 +114,7 @@ The `@var` annotation is optional.
 You can pass your configuration as a second parameter to `mikro-di`:
 
 ```javascript
-const container = new DIContainer(['api/services', 'api/repositories'], {
+require('mikro-di').init(['api/services', 'api/repositories'], {
   logger: console.log, // defaults to null
   baseDir: '/path/to/your/app', // defaults to `process.cwd()`
   contextDir: '/path/to/your/context', // defaults to `baseDir`
@@ -170,5 +174,5 @@ module.exports = {
 };
 ```
 
-It basically create object with ES6 getters that will require you services and its dependencies. 
+It basically creates object with ES6 getters that will require you services and its dependencies. 
 This way everything is loaded via lazy loading technique. 

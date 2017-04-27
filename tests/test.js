@@ -1,42 +1,46 @@
 'use strict';
 
 const fs = require('fs');
-const DIContainer = require('../lib/DIContainer');
+const MikroDI = require('../lib/MikroDI');
 
-test('build container [with default options]', () => {
-  const container = new DIContainer(['services'], {
-    baseDir: __dirname,
+describe('MikroDI', () => {
+
+  it('should build container with default options', () => {
+    const container = MikroDI.init(['services'], {
+      baseDir: __dirname,
+    });
+    expect(container).toBeInstanceOf(MikroDI);
+
+    const context = container.build();
+    expect(context.substr(context.lastIndexOf('/') + 1)).toBe('.context.js');
+
+    const di = fs.readFileSync(context).toString();
+    expect(di).toBe(fs.readFileSync(__dirname + '/expected.defaults.js').toString());
+
+    if (fs.existsSync(context)) {
+      fs.unlinkSync(context);
+    }
   });
-  expect(container).toBeInstanceOf(DIContainer);
 
-  const context = container.build();
-  expect(context.substr(context.lastIndexOf('/') + 1)).toBe('.context.js');
+  it('should build container with specified options', () => {
+    const logger = message => message; // fake logger
+    const container = MikroDI.init(['services'], {
+      baseDir: __dirname,
+      contextDir: __dirname + '/context',
+      contextName: 'di.js',
+      logger: logger,
+    });
+    expect(container).toBeInstanceOf(MikroDI);
 
-  const di = fs.readFileSync(context).toString();
-  expect(di).toBe(fs.readFileSync(__dirname + '/expected.defaults.js').toString());
+    const context = container.build();
+    expect(context.substr(context.lastIndexOf('/') + 1)).toBe('di.js');
 
-  if (fs.existsSync(context)) {
-    fs.unlinkSync(context);
-  }
-});
+    const di = fs.readFileSync(context).toString();
+    expect(di).toBe(fs.readFileSync(__dirname + '/expected.options.js').toString());
 
-test('build container [with specified options]', () => {
-  const logger = message => message; // fake logger
-  const container = new DIContainer(['services'], {
-    baseDir: __dirname,
-    contextDir: __dirname + '/context',
-    contextName: 'di.js',
-    logger: logger,
+    if (fs.existsSync(context)) {
+      fs.unlinkSync(context);
+    }
   });
-  expect(container).toBeInstanceOf(DIContainer);
 
-  const context = container.build();
-  expect(context.substr(context.lastIndexOf('/') + 1)).toBe('di.js');
-
-  const di = fs.readFileSync(context).toString();
-  expect(di).toBe(fs.readFileSync(__dirname + '/expected.options.js').toString());
-
-  if (fs.existsSync(context)) {
-    fs.unlinkSync(context);
-  }
 });

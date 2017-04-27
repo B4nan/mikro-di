@@ -1,0 +1,45 @@
+{
+  "name": "mikro-di",
+  "version": "0.0.1",
+  "description": "simple ES6 DI container for node.js",
+  "main": "lib/DIContainer.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/B4nan/mikro-di.git"
+  },
+  "keywords": [
+    "di",
+    "dependency",
+    "injection",
+    "container",
+    "ioc",
+    "node",
+    "es6",
+    "tracy"
+  ],
+  "author": "Martin Adámek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/B4nan/mikro-di/issues"
+  },
+  "homepage": "https://github.com/B4nan/mikro-di#readme",
+  "devDependencies": {
+    "coveralls": "^2.13.0",
+    "git-pre-commit": "^2.1.3",
+    "jest": "^19.0.2"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "lib/*.js"
+    ]
+  },
+  "scripts": {
+    "precommit": "eslint .",
+    "test": "node ./node_modules/jest/bin/jest.js",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
+  },
+  "dependencies": {
+    "lodash.merge": "^4.6.0"
+  }
+}

@@ -1,0 +1,7 @@
+/node_modules
+/coverage
+/.idea
+/yarn.lock
+/.coveralls.yml
+/tests/context/di.js
+/.context.js

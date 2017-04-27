@@ -1,6 +1,10 @@
 # mikro-di
 
-Simple ES6 DI container for node.js, that honours convention over configuration. 
+Simple ES6 DI container for node.js, that honours convention over configuration.
+ 
+It works by discovering given directories and generating a simple DI container 
+instance, which is properly type-hinted and allows auto-completion in editors like 
+WebStorm or VS Code. 
 
 Inspired by https://github.com/nette/di
 

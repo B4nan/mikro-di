@@ -13,9 +13,10 @@
     "injection",
     "container",
     "ioc",
+    "type-hint",
+    "jsdoc",
     "node",
-    "es6",
-    "tracy"
+    "es6"
   ],
   "author": "Martin Adámek",
   "license": "MIT",

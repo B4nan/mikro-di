@@ -2,7 +2,7 @@
   "name": "mikro-di",
   "version": "0.1.1",
   "description": "simple ES6 DI container for node.js",
-  "main": "lib/DIContainer.js",
+  "main": "lib/MikroDI.js",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/B4nan/mikro-di.git"

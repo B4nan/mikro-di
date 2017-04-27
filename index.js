@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./lib/Tracy');
+module.exports = require('./lib/MikroDI');

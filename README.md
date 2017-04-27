@@ -88,9 +88,6 @@ If you use plain object export, you can omit the type-hinting of constructor.
 
 ## Usage in sails.js controllers
 
-If you want to use `mikro-di` inside your sails.js controller, you can use directly 
-the global `di` object like this:
-
 ```javascript
 const di = require('mikro-di').di;
   

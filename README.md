@@ -134,26 +134,37 @@ The context file will look like this:
 ```javascript
 module.exports = {
  
+  _map: {},
+  
   /**
    * @returns {YourFunkyService}
    */
   get YourFunkyService() {
-    const YourFunkyService = require('./api/services/AsyncService.js');
-    return new YourFunkyService(this.YourFunkyDependency1, this.YourFunkyDependency2);
+    if (!this._map.YourFunkyService) {
+      const YourFunkyService = require('./api/services/AsyncService.js');
+      this._map.YourFunkyService = new YourFunkyService(this.YourFunkyDependency1, this.YourFunkyDependency2);
+    }
+    return this._map.YourFunkyService;
   },
  
   /**
    * @returns {YourFunkyDependency1}
    */
   get YourFunkyDependency1() {
-    return require('./api/services/YourFunkyDependency1.js');
+    if (!this._map.YourFunkyDependency1) {
+      this._map.YourFunkyDependency1 = require('./api/services/YourFunkyDependency1.js');
+    }
+    return this._map.YourFunkyDependency1;
   },
  
   /**
    * @returns {YourFunkyDependency2}
    */
   get YourFunkyDependency2() {
-    return require('./api/services/YourFunkyDependency2.js');
+    if (!this._map.YourFunkyDependency2) {
+      this._map.YourFunkyDependency2 = require('./api/services/YourFunkyDependency2.js');
+    }
+    return this._map.YourFunkyDependency2;
   },
  
 };

@@ -5,3 +5,4 @@
 /.coveralls.yml
 /tests/context/di.js
 /.context.js
+!.gitkeep

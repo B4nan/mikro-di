@@ -12,8 +12,8 @@ test('build container [with default options]', () => {
   const context = container.build();
   expect(context.substr(context.lastIndexOf('/') + 1)).toBe('.context.js');
 
-  const di = require(context);
-  expect(di).toMatchObject(require('./expected'));
+  const di = fs.readFileSync(context).toString();
+  expect(di).toBe(fs.readFileSync(__dirname + '/expected.defaults.js').toString());
 
   if (fs.existsSync(context)) {
     fs.unlinkSync(context);
@@ -33,8 +33,8 @@ test('build container [with specified options]', () => {
   const context = container.build();
   expect(context.substr(context.lastIndexOf('/') + 1)).toBe('di.js');
 
-  const di = require(context);
-  expect(di).toMatchObject(require('./expected'));
+  const di = fs.readFileSync(context).toString();
+  expect(di).toBe(fs.readFileSync(__dirname + '/expected.options.js').toString());
 
   if (fs.existsSync(context)) {
     fs.unlinkSync(context);

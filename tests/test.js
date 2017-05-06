@@ -58,10 +58,10 @@ describe('MikroDI', () => {
   describe('CycleFinder', () => {
     it('should find cycle [A -> B -> A]', () => {
       const cf = new CycleFinder({
-        A: ['B', 'C'],
-        B: ['D', 'A'],
-        C: [],
-        D: [],
+        A: {dependencies: ['B', 'C']},
+        B: {dependencies: ['D', 'A']},
+        C: {dependencies: []},
+        D: {dependencies: []},
       });
       expect(cf.hasCycle()).toBe(true);
       expect(cf.getFoundCycle()).toEqual(['A', 'B', 'A']);
@@ -69,10 +69,10 @@ describe('MikroDI', () => {
 
     it('should find cycle [A -> B -> C -> B]', () => {
       const cf = new CycleFinder({
-        A: ['B', 'C'],
-        B: ['D', 'C'],
-        C: ['B'],
-        D: [],
+        A: {dependencies: ['B', 'C']},
+        B: {dependencies: ['D', 'C']},
+        C: {dependencies: ['B']},
+        D: {dependencies: []},
       });
       expect(cf.hasCycle()).toBe(true);
       expect(cf.getFoundCycle()).toEqual(['A', 'B', 'C', 'B']);
@@ -80,10 +80,10 @@ describe('MikroDI', () => {
 
     it('should find cycle [A -> B -> C -> D -> B]', () => {
       const cf = new CycleFinder({
-        A: ['UndefinedDependency', 'B'],
-        B: ['C'],
-        C: ['D'],
-        D: ['B'],
+        A: {dependencies: ['UndefinedDependency', 'B']},
+        B: {dependencies: ['C']},
+        C: {dependencies: ['D']},
+        D: {dependencies: ['B']},
       });
       expect(cf.hasCycle()).toBe(true);
       expect(cf.getFoundCycle()).toEqual(['A', 'B', 'C', 'D', 'B']);

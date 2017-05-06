@@ -1,6 +1,6 @@
 {
   "name": "mikro-di",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "simple ES6 DI container for node.js",
   "main": "lib/MikroDI.js",
   "repository": {

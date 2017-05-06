@@ -97,7 +97,7 @@ const di = require('mikro-di').di;
   
 module.exports = {
  
-  /** @var {YourFunkyService} sendits */
+  /** @var {YourFunkyService} funkyService */
   funkyService: di.YourFunkyService,
  
   yourHandler: function (req, res) {

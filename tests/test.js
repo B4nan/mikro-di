@@ -8,40 +8,36 @@ describe('MikroDI', () => {
 
   describe('Container', () => {
     it('should build container with default options', () => {
-      const container = MikroDI.init(['services'], {
+      MikroDI.init(['services'], {
         baseDir: __dirname,
       });
-      expect(container).toBeInstanceOf(MikroDI);
+      expect(MikroDI.container).toBeInstanceOf(MikroDI);
+      expect(MikroDI.context.substr(MikroDI.context.lastIndexOf('/') + 1)).toBe('.context.js');
 
-      const context = container.build();
-      expect(context.substr(context.lastIndexOf('/') + 1)).toBe('.context.js');
-
-      const di = fs.readFileSync(context).toString();
+      const di = fs.readFileSync(MikroDI.context).toString();
       expect(di).toBe(fs.readFileSync(__dirname + '/expected.defaults.js').toString());
 
-      if (fs.existsSync(context)) {
-        fs.unlinkSync(context);
+      if (fs.existsSync(MikroDI.context)) {
+        fs.unlinkSync(MikroDI.context);
       }
     });
 
     it('should build container with specified options', () => {
       const logger = message => message; // fake logger
-      const container = MikroDI.init(['services'], {
+      MikroDI.init(['services'], {
         baseDir: __dirname,
         contextDir: __dirname + '/context',
         contextName: 'di.js',
         logger: logger,
       });
-      expect(container).toBeInstanceOf(MikroDI);
+      expect(MikroDI.container).toBeInstanceOf(MikroDI);
+      expect(MikroDI.context.substr(MikroDI.context.lastIndexOf('/') + 1)).toBe('di.js');
 
-      const context = container.build();
-      expect(context.substr(context.lastIndexOf('/') + 1)).toBe('di.js');
-
-      const di = fs.readFileSync(context).toString();
+      const di = fs.readFileSync(MikroDI.context).toString();
       expect(di).toBe(fs.readFileSync(__dirname + '/expected.options.js').toString());
 
-      if (fs.existsSync(context)) {
-        fs.unlinkSync(context);
+      if (fs.existsSync(MikroDI.context)) {
+        fs.unlinkSync(MikroDI.context);
       }
     });
 

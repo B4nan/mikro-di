@@ -144,8 +144,6 @@ console.log(di.scalarService); // YourFunkyDependency2
 console.log(di.scalarService.namespace); // 'funky-namespace'
 ```
 
-The `@var` annotation is optional. 
-
 ## Configuration
 
 You can pass your configuration as a second parameter to `mikro-di`:

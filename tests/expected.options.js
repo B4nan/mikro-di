@@ -35,7 +35,7 @@ module.exports = {
   get YourFunkyService1() {
     if (!this._map.YourFunkyService1) {
       const YourFunkyService1 = require('../services/YourFunkyService1');
-      this._map.YourFunkyService1 = new YourFunkyService1(this.YourFunkyDependency1, this.YourFunkyDependency2);
+      this._map.YourFunkyService1 = new YourFunkyService1(this.YourFunkyDependency1, this.scalarService);
     }
 
     return this._map.YourFunkyService1;

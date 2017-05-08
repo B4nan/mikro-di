@@ -4,11 +4,11 @@ class YourFunkyService1 {
 
   /**
    * @param {YourFunkyDependency1} dep1
-   * @param {YourFunkyDependency2} dep2
+   * @param {YourFunkyDependency2} scalarService
    */
-  constructor(dep1, dep2) {
+  constructor(dep1, scalarService) {
     this.dep1 = dep1;
-    this.dep2 = dep2;
+    this.dep2 = scalarService;
   }
 
 }

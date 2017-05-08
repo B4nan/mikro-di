@@ -2,8 +2,12 @@
 
 class YourFunkyDependency2 {
 
-  constructor() {
+  /**
+   * @param {String} namespace
+   */
+  constructor(namespace) {
     this.name = 'YourFunkyDependency2';
+    this.namespace = namespace;
   }
 
 }

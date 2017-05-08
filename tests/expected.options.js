@@ -23,7 +23,7 @@ module.exports = {
   get YourFunkyDependency2() {
     if (!this._map.YourFunkyDependency2) {
       const YourFunkyDependency2 = require('../services/YourFunkyDependency2');
-      this._map.YourFunkyDependency2 = new YourFunkyDependency2();
+      this._map.YourFunkyDependency2 = new YourFunkyDependency2(this.String);
     }
 
     return this._map.YourFunkyDependency2;
@@ -52,6 +52,18 @@ module.exports = {
     }
 
     return this._map.YourFunkyService2;
+  },
+
+  /**
+   * @returns {YourFunkyDependency2}
+   */
+  get scalarService() {
+    if (!this._map.scalarService) {
+      const YourFunkyDependency2 = require('../services/YourFunkyDependency2');
+      this._map.scalarService = new YourFunkyDependency2('funky-namespace');
+    }
+
+    return this._map.scalarService;
   },
 
 };

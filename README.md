@@ -6,6 +6,9 @@ It works by discovering given directories and generating a simple DI container
 instance, which is properly type-hinted and allows auto-completion in editors like 
 WebStorm or VS Code. 
 
+It also allows to create service definition with scalar constructor parameters 
+(e.g. `HttpClient('https://api.example.io')`).
+
 Inspired by https://github.com/nette/di
 
 [![](https://img.shields.io/npm/v/mikro-di.svg)](https://www.npmjs.com/package/mikro-di)
@@ -106,6 +109,39 @@ module.exports = {
   }
  
 };
+```
+
+The `@var` annotation is optional. 
+
+## Scalar constructor parameters
+
+When you need to pass a scalar constructor parameter to your service, you can
+do so be providing a service definition via `options`: 
+
+```javascript
+class YourFunkyDependency2 {
+ 
+  /**
+   * @param {String} namespace
+   */
+  constructor(namespace) {
+    this.namespace = namespace;
+  }
+ 
+}
+
+module.exports = YourFunkyDependency2;
+```
+
+```javascript
+const di = require('mikro-di').init(['api/services', 'api/repositories'], {
+  services: {
+    scalarService: `YourFunkyDependency2('funky-namespace')`,
+  },
+});
+ 
+console.log(di.scalarService); // YourFunkyDependency2
+console.log(di.scalarService.namespace); // 'funky-namespace'
 ```
 
 The `@var` annotation is optional. 

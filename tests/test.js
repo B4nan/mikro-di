@@ -10,6 +10,9 @@ describe('MikroDI', () => {
     it('should build container with default options', () => {
       MikroDI.init(['services'], {
         baseDir: __dirname,
+        services: {
+          scalarService: `YourFunkyDependency2('funky-namespace')`,
+        },
       });
       expect(MikroDI.container).toBeInstanceOf(MikroDI);
       expect(MikroDI.context.substr(MikroDI.context.lastIndexOf('/') + 1)).toBe('.context.js');
@@ -29,6 +32,9 @@ describe('MikroDI', () => {
         contextDir: __dirname + '/context',
         contextName: 'di.js',
         logger: logger,
+        services: {
+          scalarService: `YourFunkyDependency2('funky-namespace')`,
+        },
       });
       expect(MikroDI.container).toBeInstanceOf(MikroDI);
       expect(MikroDI.context.substr(MikroDI.context.lastIndexOf('/') + 1)).toBe('di.js');

@@ -215,6 +215,5 @@ This way everything is loaded via lazy loading technique.
 
 ## Circular dependencies detection
 
-Before building the container, simple DFS algorithm is used to look up cyclic dependencies.
- 
-When 
+Before building the container, simple DFS algorithm is used to look up cyclic dependencies 
+and when found, it raises an error.

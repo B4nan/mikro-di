@@ -7,7 +7,8 @@ instance, which is properly type-hinted and allows auto-completion in editors li
 WebStorm or VS Code. 
 
 It also allows to create service definition with scalar constructor parameters 
-(e.g. `HttpClient('https://api.example.io')`).
+(e.g. `HttpClient('https://api.example.io')`) and has built-in circular dependencies 
+detection. 
 
 Inspired by https://github.com/nette/di
 
@@ -211,3 +212,9 @@ module.exports = {
 
 It basically creates object with ES6 getters that will require you services and its dependencies. 
 This way everything is loaded via lazy loading technique. 
+
+## Circular dependencies detection
+
+Before building the container, simple DFS algorithm is used to look up cyclic dependencies.
+ 
+When 
